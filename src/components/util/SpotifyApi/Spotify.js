@@ -1,5 +1,5 @@
 const clientId = '1d1a75e5816447e48eb8535afb0ff56b'; // Insert client ID here.
-const redirectUri = 'http://localhost:3000/'; // Have to add this to your accepted Spotify redirect URIs on the Spotify API.
+const redirectUri = 'http://jammmingplaylistcreator.surge.sh/'; // Have to add this to your accepted Spotify redirect URIs on the Spotify API.
 let accessToken;
 
 const Spotify = {
