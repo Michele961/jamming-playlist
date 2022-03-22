@@ -10,14 +10,14 @@ class App extends React.Component {
         this.state = {
             searchResults: [
                 {
-                    id: "1",
+                    id: "11",
                     track: "Tiny Dancer",
                     name: "Tiny Dancer",
                     artist: "Elton John",
                     album: "Madman Across The Water",
                 },
                 {
-                    id: "2",
+                    id: "21",
                     track: "Stronger",
                     name: "Stronger",
                     artist: "Britney Spears",
@@ -28,16 +28,39 @@ class App extends React.Component {
             playlistName: "My Favourite Songs",
             playlistTracks: [
                 {
-                    id: "3",
+                    id: "321",
                     track: "Hey",
                     name: "Hey",
                     artist: "Bobby",
-                    album: "Oops!... I Did It Again and now ?",
-
+                    album: "Oops!... I Did It Again and now ?"
                 }
             ]
+        };
+
+        this.addTrack = this.addTrack.bind(this);
+        this.removeTrack = this.removeTrack.bind(this);
+    }
+
+    onRemove = (track) => {
+        console.log("ON REMOVE")
+        console.log(track)
+    }
+
+    addTrack(track) {
+        let tracks = this.state.playlistTracks;
+        if (tracks.find(savedTrack => savedTrack.id === track.id)) {
+            return;
         }
-        ;
+
+        tracks.push(track);
+        this.setState({playlistTracks: tracks});
+    }
+
+    removeTrack(track) {
+        let tracks = this.state.playlistTracks;
+        tracks = tracks.filter(currentTrack => currentTrack.id !== track.id);
+
+        this.setState({playlistTracks: tracks});
     }
 
     render() {
@@ -47,13 +70,18 @@ class App extends React.Component {
                 <div className="App">
                     <SearchBar/>
                     <div className="App-playlist">
-                        <SearchResults results={this.state.searchResults}/>
-                        <Playlist name={this.state.playlistName} tracks={this.state.playlistTracks}/>
+                        <SearchResults onAdd={this.addTrack} results={this.state.searchResults}/>
+                        <Playlist name={this.state.playlistName} tracks={this.state.playlistTracks}
+                                  onRemove={this.onRemove}/>
                     </div>
                 </div>
             </div>
         );
     }
+
+
+
 }
+
 
 export default App;
